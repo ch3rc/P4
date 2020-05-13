@@ -21,6 +21,27 @@ void stdinFp(FILE *stream)
 	}
 }
 
+char *fileBasename(char *argv)
+{
+	char *base = malloc(sizeof(argv) + 1);
+
+	char find = '.';
+
+	char *firstPos = strchr(argv, find);
+
+	int position = firstPos - argv;
+
+	strncpy(base, argv, position);
+
+	char *temporary = malloc(sizeof(base) + sizeof(argv) + 1);
+
+	strcpy(temporary, base);
+
+	strcat(temporary, ".asm");
+
+	return temporary;
+}
+
 void returnFp(char *argv)
 {
 	FILE *stream;

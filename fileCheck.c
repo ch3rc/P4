@@ -10,6 +10,10 @@
 
 int fileno(FILE *stream);
 
+int kb_flag = 0;
+int file_flag = 0;
+int std_in_flag = 0;
+
 FILE *checkFile(int argc, char *argv[])
 {
 	FILE *fp;
@@ -22,8 +26,8 @@ FILE *checkFile(int argc, char *argv[])
 			stdinFp(stdin);
 
 			fp = stdin;
+			std_in_flag = 1;
 
-			//basename = stdinBasename();
 		}
 		else
 		{
@@ -40,6 +44,7 @@ FILE *checkFile(int argc, char *argv[])
 				fp = fopen(argv[1], "r");
 
 				//basename = fileBasename(argv[1]);
+				file_flag = 1;
 		}
 		else if(strstr(argv[1], "_") && !strstr(argv[1], "."))
 		{
@@ -49,6 +54,7 @@ FILE *checkFile(int argc, char *argv[])
 				perror("ERROR: fp: functions\n");
 				exit(1);
 			}
+			file_flag = 1;
 		}
 		else
 		{
@@ -57,6 +63,7 @@ FILE *checkFile(int argc, char *argv[])
 			fp = fopen(file, "r");
 
 			//basename = "output";
+			kb_flag = 1;
 		}
 
 	}
@@ -67,6 +74,7 @@ FILE *checkFile(int argc, char *argv[])
 		file = handleNodeString(argc, argv);
 
 		fp = fopen(file, "r");
+		kb_flag = 1;
 
 	}
 
